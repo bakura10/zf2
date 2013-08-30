@@ -119,7 +119,7 @@ class FormInput extends AbstractHelper
         }
 
         $attributes          = $element->getAttributes();
-        $attributes['name']  = $name;
+        $attributes['name']  = isset($attributes['name']) ? $attributes['name'] : $name;
         $attributes['type']  = $this->getType($element);
         $attributes['value'] = $element->getValue();
 

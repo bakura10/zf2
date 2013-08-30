@@ -519,4 +519,14 @@ class FormInputTest extends CommonTestCase
 
         $this->assertContains('title="translated string"', $markup);
     }
+
+    public function testCanOverrideNameWithAttributes()
+    {
+        $element = new Element('customName');
+        $element->setAttribute('name', 'custom-name');
+
+        $markup = $this->helper->__invoke($element);
+
+        $this->assertContains('name="custom-name"', $markup);
+    }
 }
