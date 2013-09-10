@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ServiceManager;
+namespace Zend\ServiceManager;
 
 /**
  * Service manager is a simple implementation of a service locator
@@ -42,6 +42,15 @@ class ServiceManager implements ServiceLocatorInterface
      * @var array|AbstractFactoryInterface[]
      */
     protected $abstractFactories = array();
+
+    /**
+     * List of delegators
+     *
+     * A delegator allows to delegate the creation of an instance to another factory
+     *
+     * @var array|DelegatorFactoryInterface[]
+     */
+    protected $delegators = array();
 
     /**
      * List of initializers
@@ -108,6 +117,18 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Set invokables (overriding old ones)
+     *
+     * @param array $config
+     * @return void
+     */
+    public function setInvokables(array $config)
+    {
+        $this->invokables = array();
+        $this->setInvokables($config);
+    }
+
+    /**
      * Add factories
      *
      * @param  array $config
@@ -116,6 +137,18 @@ class ServiceManager implements ServiceLocatorInterface
     public function addFactories(array $config)
     {
         $this->factories = array_merge($this->factories, $config);
+    }
+
+    /**
+     * Set factories (overriding old ones)
+     *
+     * @param array $config
+     * @return void
+     */
+    public function setFactories(array $config)
+    {
+        $this->factories = array();
+        $this->addFactories($config);
     }
 
     /**
@@ -138,6 +171,41 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Set abstract factories (overriding old ones)
+     *
+     * @param  array $config
+     * @return void
+     */
+    public function setAbstractFactories(array $config)
+    {
+        $this->abstractFactories = array();
+        $this->addAbstractFactories($config);
+    }
+
+    /**
+     * Add delegators
+     *
+     * @param  array $config
+     * @return void
+     */
+    public function addDelegators(array $config)
+    {
+        $this->delegators = array_merge($this->delegators, $config);
+    }
+
+    /**
+     * Set delegators (overriding old ones)
+     *
+     * @param array $config
+     * @return void
+     */
+    public function setDelegators(array $config)
+    {
+        $this->delegators = array();
+        $this->addDelegators($config);
+    }
+
+    /**
      * Add initializers
      *
      * @param  array $config
@@ -156,6 +224,18 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Set initializers (overriding old ones)
+     *
+     * @param array $config
+     * @return void
+     */
+    public function setInitializers(array $config)
+    {
+        $this->initializers = array();
+        $this->addInitializers($config);
+    }
+
+    /**
      * Add aliases
      *
      * @param  array $config
@@ -167,6 +247,18 @@ class ServiceManager implements ServiceLocatorInterface
     }
 
     /**
+     * Set aliases (overriding old ones)
+     *
+     * @param array $config
+     * @return void
+     */
+    public function setAliases(array $config)
+    {
+        $this->aliases = array();
+        $this->addAliases($config);
+    }
+
+    /**
      * Add shared objects
      *
      * @param  array $config
@@ -175,6 +267,18 @@ class ServiceManager implements ServiceLocatorInterface
     public function addShared(array $config)
     {
         $this->shared = array_merge($this->shared, $config);
+    }
+
+    /**
+     * Set shared objects (overriding old ones)
+     *
+     * @param array $config
+     * @return void
+     */
+    public function setShared(array $config)
+    {
+        $this->shared = array();
+        $this->addShared($config);
     }
 
     /**
@@ -235,7 +339,7 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         foreach ($this->abstractFactories as $abstractFactory) {
-            if ($abstractFactory->canCreateServiceWithName($name)) {
+            if ($abstractFactory->canCreateServiceWithName($this, $name)) {
                 return true;
             }
         }
@@ -292,8 +396,8 @@ class ServiceManager implements ServiceLocatorInterface
         // Now use each initializers
         foreach ($this->initializers as $initializer) {
             if ($initializer instanceof InitializerInterface) {
-                $initializer->initialize($instance);
-            } else {
+                $initializer->initialize($instance, $this);
+            } elseif (is_callable($initializer)) {
                 $initializer($instance, $this);
             }
         }
@@ -312,6 +416,7 @@ class ServiceManager implements ServiceLocatorInterface
         $this->addInvokables($config->getInvokablesConfig());
         $this->addFactories($config->getFactoriesConfig());
         $this->addAbstractFactories($config->getAbstractFactoriesConfig());
+        $this->addDelegators($config->getDelegatorsConfig());
         $this->addInitializers($config->getInitializersConfig());
         $this->addAliases($config->getAliasesConfig());
         $this->addShared($config->getSharedConfig());
@@ -365,8 +470,8 @@ class ServiceManager implements ServiceLocatorInterface
     protected function createFromAbstractFactory($name, array $creationOptions = array())
     {
         foreach ($this->abstractFactories as $abstractFactory) {
-            if ($abstractFactory->canCreateServiceWithName($name)) {
-                return $abstractFactory->createServiceWithName($name, $creationOptions);
+            if ($abstractFactory->canCreateServiceWithName($this, $name)) {
+                return $abstractFactory->createServiceWithName($this, $name, $creationOptions);
             }
         }
 

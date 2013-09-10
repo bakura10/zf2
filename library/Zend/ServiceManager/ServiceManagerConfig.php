@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace ServiceManager;
+namespace Zend\ServiceManager;
 
 /**
  * Simple object that wrap a configuration for a service manager
@@ -55,6 +55,16 @@ class ServiceManagerConfig
     public function getAbstractFactoriesConfig()
     {
         return isset($this->config['abstract_factories']) ? $this->config['abstract_factories'] : array();
+    }
+
+    /**
+     * Get the delegators factories configuration
+     *
+     * @return array
+     */
+    public function getDelegatorsConfig()
+    {
+        return isset($this->config['delegators']) ? $this->config['delegators'] : array();
     }
 
     /**
