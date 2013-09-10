@@ -340,7 +340,7 @@ class ServiceManager implements ServiceLocatorInterface
     public function has($name, $checkAbstractFactories = true)
     {
         $name  = $this->resolveAlias($name);
-        $found = isset($this->invokables[$name]) || isset($this->factories[$name]);
+        $found = isset($this->invokables[$name]) || isset($this->factories[$name]) || isset($this->instances[$name]);
 
         if ($found || !$checkAbstractFactories) {
             return $found;
