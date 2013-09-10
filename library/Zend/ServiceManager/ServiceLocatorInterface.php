@@ -7,7 +7,7 @@
  * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 
-namespace Zend\ServiceManager;
+namespace ServiceManager;
 
 /**
  * Service locator interface
@@ -18,10 +18,11 @@ interface ServiceLocatorInterface
      * Retrieve a registered instance
      *
      * @param  string  $name
+     * @param  array   $creationOptions
      * @throws Exception\ServiceNotFoundException
      * @return object|array
      */
-    public function get($name);
+    public function get($name, array $creationOptions = array());
 
     /**
      * Check for a registered instance

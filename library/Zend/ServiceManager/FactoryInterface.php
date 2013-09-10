@@ -12,10 +12,11 @@ namespace Zend\ServiceManager;
 interface FactoryInterface
 {
     /**
-     * Create service
+     * Create service using a factory
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param  ServiceLocatorInterface $serviceLocator
+     * @param  array                   $creationOptions
      * @return mixed
      */
-    public function createService(ServiceLocatorInterface $serviceLocator);
+    public function createService(ServiceLocatorInterface $serviceLocator, array $creationOptions = array());
 }
