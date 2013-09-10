@@ -15,6 +15,15 @@ namespace Zend\ServiceManager;
 interface ServiceLocatorInterface
 {
     /**
+     * Set a registered instance
+     *
+     * @param  string $name
+     * @param  mixed  $instance
+     * @return void
+     */
+    public function set($name, $instance);
+
+    /**
      * Retrieve a registered instance
      *
      * @param  string  $name

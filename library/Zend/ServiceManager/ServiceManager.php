@@ -305,6 +305,14 @@ class ServiceManager implements ServiceLocatorInterface
     /**
      * {@inheritDoc}
      */
+    public function set($name, $instance)
+    {
+        $this->instances[$name] = $instance;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function get($name, array $creationOptions = array())
     {
         $name = $this->resolveAlias($name);
@@ -403,6 +411,21 @@ class ServiceManager implements ServiceLocatorInterface
         }
 
         return $instance;
+    }
+
+    /**
+     * Retrieve a keyed list of all registered services. Handy for debugging!
+     *
+     * @return array
+     */
+    public function getRegisteredServices()
+    {
+        return array(
+            'invokables' => array_keys($this->invokables),
+            'factories'  => array_keys($this->factories),
+            'aliases'    => array_keys($this->aliases),
+            'instances'  => array_keys($this->instances)
+        );
     }
 
     /**
