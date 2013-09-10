@@ -320,7 +320,7 @@ class ServiceManager implements ServiceLocatorInterface
         // Check if the instance for that name has already been created and is not shared
         $shared = isset($this->shared[$name]) ? $this->shared[$name] : $this->sharedByDefault;
 
-        if (isset($this->instances[$name]) || isset($this->shared[$name]) && !$this->shared[$name]) {
+        if (isset($this->instances[$name]) && $shared) {
             return $this->instances[$name];
         }
 
