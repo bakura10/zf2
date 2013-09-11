@@ -1,0 +1,29 @@
+
+extern zend_class_entry *zend_servicemanager_servicemanagerconfig_ce;
+
+ZEPHIR_INIT_CLASS(Zend_ServiceManager_ServiceManagerConfig);
+
+PHP_METHOD(Zend_ServiceManager_ServiceManagerConfig, __construct);
+PHP_METHOD(Zend_ServiceManager_ServiceManagerConfig, getInvokablesConfig);
+PHP_METHOD(Zend_ServiceManager_ServiceManagerConfig, getFactoriesConfig);
+PHP_METHOD(Zend_ServiceManager_ServiceManagerConfig, getAbstractFactoriesConfig);
+PHP_METHOD(Zend_ServiceManager_ServiceManagerConfig, getDelegatorsConfig);
+PHP_METHOD(Zend_ServiceManager_ServiceManagerConfig, getInitializersConfig);
+PHP_METHOD(Zend_ServiceManager_ServiceManagerConfig, getAliasesConfig);
+PHP_METHOD(Zend_ServiceManager_ServiceManagerConfig, getSharedConfig);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_zend_servicemanager_servicemanagerconfig___construct, 0, 0, 0)
+	ZEND_ARG_INFO(0, config)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(zend_servicemanager_servicemanagerconfig_method_entry) {
+	PHP_ME(Zend_ServiceManager_ServiceManagerConfig, __construct, arginfo_zend_servicemanager_servicemanagerconfig___construct, ZEND_ACC_PUBLIC)
+	PHP_ME(Zend_ServiceManager_ServiceManagerConfig, getInvokablesConfig, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Zend_ServiceManager_ServiceManagerConfig, getFactoriesConfig, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Zend_ServiceManager_ServiceManagerConfig, getAbstractFactoriesConfig, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Zend_ServiceManager_ServiceManagerConfig, getDelegatorsConfig, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Zend_ServiceManager_ServiceManagerConfig, getInitializersConfig, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Zend_ServiceManager_ServiceManagerConfig, getAliasesConfig, NULL, ZEND_ACC_PUBLIC)
+	PHP_ME(Zend_ServiceManager_ServiceManagerConfig, getSharedConfig, NULL, ZEND_ACC_PUBLIC)
+	PHP_FE_END
+};

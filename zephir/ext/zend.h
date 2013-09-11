@@ -1,2 +1,12 @@
 
+#include "zend/servicemanager/abstractfactoryinterface.h"
+#include "zend/servicemanager/delegatorfactoryinterface.h"
+#include "zend/servicemanager/exception/exceptioninterface.h"
+#include "zend/servicemanager/exception/invalidargumentexception.h"
+#include "zend/servicemanager/exception/runtimeexception.h"
+#include "zend/servicemanager/exception/servicenotfoundexception.h"
+#include "zend/servicemanager/factoryinterface.h"
+#include "zend/servicemanager/initializerinterface.h"
 #include "zend/servicemanager/servicelocatorinterface.h"
+#include "zend/servicemanager/servicemanager.h"
+#include "zend/servicemanager/servicemanagerconfig.h"

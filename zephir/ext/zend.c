@@ -16,13 +16,33 @@
 #include "kernel/main.h"
 #include "kernel/memory.h"
 
+zend_class_entry *zend_servicemanager_abstractfactoryinterface_ce;
+zend_class_entry *zend_servicemanager_delegatorfactoryinterface_ce;
+zend_class_entry *zend_servicemanager_exception_exceptioninterface_ce;
+zend_class_entry *zend_servicemanager_factoryinterface_ce;
+zend_class_entry *zend_servicemanager_initializerinterface_ce;
 zend_class_entry *zend_servicemanager_servicelocatorinterface_ce;
+zend_class_entry *zend_servicemanager_exception_invalidargumentexception_ce;
+zend_class_entry *zend_servicemanager_exception_runtimeexception_ce;
+zend_class_entry *zend_servicemanager_exception_servicenotfoundexception_ce;
+zend_class_entry *zend_servicemanager_servicemanager_ce;
+zend_class_entry *zend_servicemanager_servicemanagerconfig_ce;
 
 ZEND_DECLARE_MODULE_GLOBALS(zend)
 
 PHP_MINIT_FUNCTION(zend){
 
+	ZEPHIR_INIT(Zend_ServiceManager_AbstractFactoryInterface);
+	ZEPHIR_INIT(Zend_ServiceManager_DelegatorFactoryInterface);
+	ZEPHIR_INIT(Zend_ServiceManager_Exception_ExceptionInterface);
+	ZEPHIR_INIT(Zend_ServiceManager_FactoryInterface);
+	ZEPHIR_INIT(Zend_ServiceManager_InitializerInterface);
 	ZEPHIR_INIT(Zend_ServiceManager_ServiceLocatorInterface);
+	ZEPHIR_INIT(Zend_ServiceManager_Exception_InvalidArgumentException);
+	ZEPHIR_INIT(Zend_ServiceManager_Exception_RuntimeException);
+	ZEPHIR_INIT(Zend_ServiceManager_Exception_ServiceNotFoundException);
+	ZEPHIR_INIT(Zend_ServiceManager_ServiceManager);
+	ZEPHIR_INIT(Zend_ServiceManager_ServiceManagerConfig);
 	return SUCCESS;
 }
 
