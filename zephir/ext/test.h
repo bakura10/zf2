@@ -1,0 +1,12 @@
+
+#include "test/servicemanager/abstractfactoryinterface.h"
+#include "test/servicemanager/delegatorfactoryinterface.h"
+#include "test/servicemanager/exception/exceptioninterface.h"
+#include "test/servicemanager/exception/invalidargumentexception.h"
+#include "test/servicemanager/exception/runtimeexception.h"
+#include "test/servicemanager/exception/servicenotfoundexception.h"
+#include "test/servicemanager/factoryinterface.h"
+#include "test/servicemanager/initializerinterface.h"
+#include "test/servicemanager/servicelocatorinterface.h"
+#include "test/servicemanager/servicemanager.h"
+#include "test/servicemanager/servicemanagerconfig.h"

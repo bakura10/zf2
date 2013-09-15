@@ -454,7 +454,7 @@ class ServiceManager implements ServiceLocatorInterface
      */
     protected function createFromInvokable($name, array $creationOptions = array())
     {
-        return isset($this->invokables[$name]) ? new $this->invokables[$name]($creationOptions) : null;
+        return new $this->invokables[$name]($creationOptions);
     }
 
     /**

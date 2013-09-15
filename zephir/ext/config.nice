@@ -2,5 +2,8 @@
 #
 # Created by configure
 
+CFLAGS='-O0 -g' \
+CC='gcc' \
 './configure' \
+'--enable-test' \
 "$@"

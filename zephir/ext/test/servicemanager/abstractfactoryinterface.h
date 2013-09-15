@@ -1,0 +1,21 @@
+
+extern zend_class_entry *test_servicemanager_abstractfactoryinterface_ce;
+
+ZEPHIR_INIT_CLASS(Test_ServiceManager_AbstractFactoryInterface);
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_test_servicemanager_abstractfactoryinterface_cancreateservicewithname, 0, 0, 0)
+	ZEND_ARG_INFO(0, serviceLocator)
+	ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_test_servicemanager_abstractfactoryinterface_createservicewithname, 0, 0, 0)
+	ZEND_ARG_INFO(0, serviceLocator)
+	ZEND_ARG_INFO(0, name)
+	ZEND_ARG_INFO(0, creationOptions)
+ZEND_END_ARG_INFO()
+
+ZEPHIR_INIT_FUNCS(test_servicemanager_abstractfactoryinterface_method_entry) {
+	PHP_ABSTRACT_ME(Test_ServiceManager_AbstractFactoryInterface, canCreateServiceWithName, arginfo_test_servicemanager_abstractfactoryinterface_cancreateservicewithname)
+	PHP_ABSTRACT_ME(Test_ServiceManager_AbstractFactoryInterface, createServiceWithName, arginfo_test_servicemanager_abstractfactoryinterface_createservicewithname)
+	PHP_FE_END
+};

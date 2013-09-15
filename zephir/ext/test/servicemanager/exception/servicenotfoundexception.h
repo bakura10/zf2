@@ -1,0 +1,5 @@
+
+extern zend_class_entry *test_servicemanager_exception_servicenotfoundexception_ce;
+
+ZEPHIR_INIT_CLASS(Test_ServiceManager_Exception_ServiceNotFoundException);
+

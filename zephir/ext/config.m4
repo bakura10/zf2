@@ -1,7 +1,7 @@
-PHP_ARG_ENABLE(test, whether to enable zend, [ --enable-zend   Enable Zend framework])
+PHP_ARG_ENABLE(test, whether to enable test, [ --enable-test   Enable Test framework])
 
 if test "$PHP_TEST" = "yes"; then
-	AC_DEFINE(HAVE_ZEND, 1, [Whether you have Zend])
-	test_sources="zend.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/alternative/fcall.c kernel/operators.c kernel/concat.c zend/servicemanager/abstractfactoryinterface.c zend/servicemanager/delegatorfactoryinterface.c zend/servicemanager/exception/exceptioninterface.c zend/servicemanager/exception/invalidargumentexception.c zend/servicemanager/exception/runtimeexception.c zend/servicemanager/exception/servicenotfoundexception.c zend/servicemanager/factoryinterface.c zend/servicemanager/initializerinterface.c zend/servicemanager/servicelocatorinterface.c zend/servicemanager/servicemanager.c zend/servicemanager/servicemanagerconfig.c"
-	PHP_NEW_EXTENSION(zend, $zend_sources, $ext_shared)
+	AC_DEFINE(HAVE_TEST, 1, [Whether you have Test])
+	test_sources="test.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/alternative/fcall.c kernel/operators.c kernel/concat.c test/servicemanager/abstractfactoryinterface.c test/servicemanager/delegatorfactoryinterface.c test/servicemanager/exception/exceptioninterface.c test/servicemanager/exception/invalidargumentexception.c test/servicemanager/exception/runtimeexception.c test/servicemanager/exception/servicenotfoundexception.c test/servicemanager/factoryinterface.c test/servicemanager/initializerinterface.c test/servicemanager/servicelocatorinterface.c test/servicemanager/servicemanager.c test/servicemanager/servicemanagerconfig.c"
+	PHP_NEW_EXTENSION(test, $test_sources, $ext_shared)
 fi

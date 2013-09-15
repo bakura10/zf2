@@ -1487,7 +1487,7 @@ Optional Features and Packages:
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
   --with-libdir=NAME      Look for libraries in .../NAME rather than .../lib
   --with-php-config=PATH  Path to php-config php-config
- --enable-zend   Enable Zend framework
+ --enable-test   Enable Test framework
   --enable-shared=PKGS  build shared libraries default=yes
   --enable-static=PKGS  build static libraries default=yes
   --enable-fast-install=PKGS  optimize for fast installation default=yes
@@ -4047,8 +4047,8 @@ $as_echo "no" >&6; }
 
 php_enable_test=no
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable zend" >&5
-$as_echo_n "checking whether to enable zend... " >&6; }
+{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable test" >&5
+$as_echo_n "checking whether to enable test... " >&6; }
 # Check whether --enable-test was given.
 if test "${enable_test+set}" = set; then :
   enableval=$enable_test; PHP_TEST=$enableval
@@ -4094,9 +4094,9 @@ $as_echo "$ext_output" >&6; }
 
 if test "$PHP_TEST" = "yes"; then
 
-$as_echo "#define HAVE_ZEND 1" >>confdefs.h
+$as_echo "#define HAVE_TEST 1" >>confdefs.h
 
-	test_sources="zend.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/alternative/fcall.c kernel/operators.c kernel/concat.c zend/servicemanager/abstractfactoryinterface.c zend/servicemanager/delegatorfactoryinterface.c zend/servicemanager/exception/exceptioninterface.c zend/servicemanager/exception/invalidargumentexception.c zend/servicemanager/exception/runtimeexception.c zend/servicemanager/exception/servicenotfoundexception.c zend/servicemanager/factoryinterface.c zend/servicemanager/initializerinterface.c zend/servicemanager/servicelocatorinterface.c zend/servicemanager/servicemanager.c zend/servicemanager/servicemanagerconfig.c"
+	test_sources="test.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/alternative/fcall.c kernel/operators.c kernel/concat.c test/servicemanager/abstractfactoryinterface.c test/servicemanager/delegatorfactoryinterface.c test/servicemanager/exception/exceptioninterface.c test/servicemanager/exception/invalidargumentexception.c test/servicemanager/exception/runtimeexception.c test/servicemanager/exception/servicenotfoundexception.c test/servicemanager/factoryinterface.c test/servicemanager/initializerinterface.c test/servicemanager/servicelocatorinterface.c test/servicemanager/servicemanager.c test/servicemanager/servicemanagerconfig.c"
 
   ext_builddir=.
   ext_srcdir=$abs_srcdir
@@ -4104,7 +4104,7 @@ $as_echo "#define HAVE_ZEND 1" >>confdefs.h
   ac_extra=
 
   if test "$ext_shared" != "shared" && test "$ext_shared" != "yes" && test "" != "cli"; then
-    PHP_ZEND_SHARED=no
+    PHP_TEST_SHARED=no
 
 
   case "" in
@@ -4125,7 +4125,7 @@ $as_echo "#define HAVE_ZEND 1" >>confdefs.h
 
 
   old_IFS=$IFS
-  for ac_src in $zend_sources; do
+  for ac_src in $test_sources; do
 
       IFS=.
       set $ac_src
@@ -4148,13 +4148,13 @@ EOF
   done
 
 
-    EXT_STATIC="$EXT_STATIC zend"
+    EXT_STATIC="$EXT_STATIC test"
     if test "$ext_shared" != "nocli"; then
-      EXT_CLI_STATIC="$EXT_CLI_STATIC zend"
+      EXT_CLI_STATIC="$EXT_CLI_STATIC test"
     fi
   else
     if test "$ext_shared" = "shared" || test "$ext_shared" = "yes"; then
-      PHP_ZEND_SHARED=yes
+      PHP_TEST_SHARED=yes
 
   case "" in
   "") ac_srcdir="$abs_srcdir/"; unset ac_bdir; ac_inc="-I. -I$abs_srcdir" ;;
@@ -4174,14 +4174,14 @@ EOF
 
 
   old_IFS=$IFS
-  for ac_src in $zend_sources; do
+  for ac_src in $test_sources; do
 
       IFS=.
       set $ac_src
       ac_obj=$1
       IFS=$old_IFS
 
-      shared_objects_zend="$shared_objects_zend $ac_bdir$ac_obj.lo"
+      shared_objects_test="$shared_objects_test $ac_bdir$ac_obj.lo"
 
       case $ac_src in
         *.c) ac_comp="$b_c_pre $ac_extra $ac_inc $b_c_meta -c $ac_srcdir$ac_src -o $ac_bdir$ac_obj.$b_lo $b_c_post" ;;
@@ -4204,31 +4204,31 @@ EOF
   case $host_alias in
     *aix*)
       suffix=so
-      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -Wl,-G -o '$ext_builddir'/phpzend.la -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_zend) $(PHPZEND_SHARED_LIBADD) && mv -f '$ext_builddir'/.libs/phpzend.so '$ext_builddir'/phpzend.so'
+      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -Wl,-G -o '$ext_builddir'/phptest.la -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_test) $(PHPTEST_SHARED_LIBADD) && mv -f '$ext_builddir'/.libs/phptest.so '$ext_builddir'/phptest.so'
       ;;
     *netware*)
       suffix=nlm
-      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -shared -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_zend) -L$(top_builddir)/netware -lphp5lib $(ZEND_SHARED_LIBADD)'
+      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -shared -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_test) -L$(top_builddir)/netware -lphp5lib $(TEST_SHARED_LIBADD)'
       ;;
     *)
       suffix=la
-      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_zend) $(PHPZEND_SHARED_LIBADD)'
+      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_test) $(PHPTEST_SHARED_LIBADD)'
       ;;
   esac
 
   if test "x" = "xyes"; then
-    PHP_ZEND_EX="$PHP_ZEND_EX \$(phplibdir)/phpzend.$suffix"
+    PHP_ZEND_EX="$PHP_ZEND_EX \$(phplibdir)/phptest.$suffix"
   else
-    PHP_MODULES="$PHP_MODULES \$(phplibdir)/phpzend.$suffix"
+    PHP_MODULES="$PHP_MODULES \$(phplibdir)/phptest.$suffix"
   fi
 
-  PHP_VAR_SUBST="$PHP_VAR_SUBST shared_objects_zend"
+  PHP_VAR_SUBST="$PHP_VAR_SUBST shared_objects_test"
 
   cat >>Makefile.objects<<EOF
-\$(phplibdir)/phpzend.$suffix: $ext_builddir/phpzend.$suffix
-	\$(LIBTOOL) --mode=install cp $ext_builddir/phpzend.$suffix \$(phplibdir)
+\$(phplibdir)/phptest.$suffix: $ext_builddir/phptest.$suffix
+	\$(LIBTOOL) --mode=install cp $ext_builddir/phptest.$suffix \$(phplibdir)
 
-$ext_builddir/phpzend.$suffix: \$(shared_objects_zend) \$(PHPZEND_SHARED_DEPENDENCIES)
+$ext_builddir/phptest.$suffix: \$(shared_objects_test) \$(PHPTEST_SHARED_DEPENDENCIES)
 	$link_cmd
 
 EOF
@@ -4241,31 +4241,31 @@ EOF
   case $host_alias in
     *aix*)
       suffix=so
-      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -Wl,-G -o '$ext_builddir'/zend.la -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_zend) $(ZEND_SHARED_LIBADD) && mv -f '$ext_builddir'/.libs/zend.so '$ext_builddir'/zend.so'
+      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -Wl,-G -o '$ext_builddir'/test.la -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_test) $(TEST_SHARED_LIBADD) && mv -f '$ext_builddir'/.libs/test.so '$ext_builddir'/test.so'
       ;;
     *netware*)
       suffix=nlm
-      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -shared -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_zend) -L$(top_builddir)/netware -lphp5lib $(D_SHARED_LIBADD)'
+      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -shared -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_test) -L$(top_builddir)/netware -lphp5lib $(T_SHARED_LIBADD)'
       ;;
     *)
       suffix=la
-      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_zend) $(ZEND_SHARED_LIBADD)'
+      link_cmd='$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_test) $(TEST_SHARED_LIBADD)'
       ;;
   esac
 
   if test "x" = "xyes"; then
-    PHP_ZEND_EX="$PHP_ZEND_EX \$(phplibdir)/zend.$suffix"
+    PHP_ZEND_EX="$PHP_ZEND_EX \$(phplibdir)/test.$suffix"
   else
-    PHP_MODULES="$PHP_MODULES \$(phplibdir)/zend.$suffix"
+    PHP_MODULES="$PHP_MODULES \$(phplibdir)/test.$suffix"
   fi
 
-  PHP_VAR_SUBST="$PHP_VAR_SUBST shared_objects_zend"
+  PHP_VAR_SUBST="$PHP_VAR_SUBST shared_objects_test"
 
   cat >>Makefile.objects<<EOF
-\$(phplibdir)/zend.$suffix: $ext_builddir/zend.$suffix
-	\$(LIBTOOL) --mode=install cp $ext_builddir/zend.$suffix \$(phplibdir)
+\$(phplibdir)/test.$suffix: $ext_builddir/test.$suffix
+	\$(LIBTOOL) --mode=install cp $ext_builddir/test.$suffix \$(phplibdir)
 
-$ext_builddir/zend.$suffix: \$(shared_objects_zend) \$(ZEND_SHARED_DEPENDENCIES)
+$ext_builddir/test.$suffix: \$(shared_objects_test) \$(TEST_SHARED_DEPENDENCIES)
 	$link_cmd
 
 EOF
@@ -4274,14 +4274,14 @@ EOF
       esac
 
 cat >>confdefs.h <<_ACEOF
-#define COMPILE_DL_ZEND 1
+#define COMPILE_DL_TEST 1
 _ACEOF
 
     fi
   fi
 
   if test "$ext_shared" != "shared" && test "$ext_shared" != "yes" && test "" = "cli"; then
-    PHP_ZEND_SHARED=no
+    PHP_TEST_SHARED=no
     case "$PHP_SAPI" in
       cgi|embed)
 
@@ -4304,7 +4304,7 @@ _ACEOF
 
 
   old_IFS=$IFS
-  for ac_src in $zend_sources; do
+  for ac_src in $test_sources; do
 
       IFS=.
       set $ac_src
@@ -4327,7 +4327,7 @@ EOF
   done
 
 
-        EXT_STATIC="$EXT_STATIC zend"
+        EXT_STATIC="$EXT_STATIC test"
         ;;
       *)
 
@@ -4350,7 +4350,7 @@ EOF
 
 
   old_IFS=$IFS
-  for ac_src in $zend_sources; do
+  for ac_src in $test_sources; do
 
       IFS=.
       set $ac_src
@@ -4375,7 +4375,7 @@ EOF
 
         ;;
     esac
-    EXT_CLI_STATIC="$EXT_CLI_STATIC zend"
+    EXT_CLI_STATIC="$EXT_CLI_STATIC test"
   fi
 
 
@@ -4384,7 +4384,7 @@ EOF
 
 
   if test "$ext_builddir" = "."; then
-    PHP_PECL_EXTENSION=zend
+    PHP_PECL_EXTENSION=test
 
   PHP_VAR_SUBST="$PHP_VAR_SUBST PHP_PECL_EXTENSION"
 
