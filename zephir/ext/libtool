@@ -65,14 +65,14 @@ allow_libtool_libs_with_static_runtimes=no
 fast_install=needless
 
 # The host system.
-host_alias=i386-apple-darwin12.4.0
-host=i386-apple-darwin12.4.0
-host_os=darwin12.4.0
+host_alias=i386-apple-darwin12.5.0
+host=i386-apple-darwin12.5.0
+host_os=darwin12.5.0
 
 # The build system.
 build_alias=
-build=i386-apple-darwin12.4.0
-build_os=darwin12.4.0
+build=i386-apple-darwin12.5.0
+build_os=darwin12.5.0
 
 # An echo program that does not interpret backslashes.
 echo="/bin/echo"
@@ -82,13 +82,13 @@ AR="ar"
 AR_FLAGS="cru"
 
 # A C compiler.
-LTCC="gcc"
+LTCC="cc"
 
 # LTCC compiler flags.
-LTCFLAGS="-O0 -g"
+LTCFLAGS="-g -O2"
 
 # A language-specific compiler.
-CC="gcc"
+CC="cc"
 
 # Is the compiler the GNU C compiler?
 with_gcc=yes
@@ -97,7 +97,7 @@ with_gcc=yes
 EGREP="/usr/bin/grep -E"
 
 # The linker used to build libraries.
-LD="/usr/llvm-gcc-4.2/libexec/gcc/i686-apple-darwin11/4.2.1/ld"
+LD="/usr/bin/ld"
 
 # Whether we need hard or soft links.
 LN_S="ln -s"
@@ -174,7 +174,7 @@ dlopen_self_static=unknown
 link_static_flag=""
 
 # Compiler flag to turn off builtin functions.
-no_builtin_flag=" -fno-builtin"
+no_builtin_flag=" -fno-builtin -fno-rtti -fno-exceptions"
 
 # Compiler flag to allow reflexive dlopens.
 export_dynamic_flag_spec=""
@@ -326,7 +326,7 @@ variables_saved_for_relink="PATH DYLD_LIBRARY_PATH  GCC_EXEC_PREFIX COMPILER_PAT
 link_all_deplibs=yes
 
 # Compile-time system search path for libraries
-sys_lib_search_path_spec="/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1/x86_64 /Applications/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib/gcc/i686-apple-darwin11/4.2.1/x86_64 /usr/lib /usr/llvm-gcc-4.2/lib/gcc /usr/llvm-gcc-4.2/lib /Applications/Xcode.app/Contents/Developer/usr/llvm-gcc-4.2/lib /usr/local/lib"
+sys_lib_search_path_spec="/usr/lib/clang/4.2 /usr/local/lib"
 
 # Run-time system search path for libraries
 sys_lib_dlsearch_path_spec="/usr/local/lib /lib /usr/lib"

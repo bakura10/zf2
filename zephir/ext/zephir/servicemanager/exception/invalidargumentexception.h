@@ -1,0 +1,5 @@
+
+extern zend_class_entry *zephir_servicemanager_exception_invalidargumentexception_ce;
+
+ZEPHIR_INIT_CLASS(Zephir_ServiceManager_Exception_InvalidArgumentException);
+

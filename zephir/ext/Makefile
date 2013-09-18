@@ -4,16 +4,16 @@ top_srcdir = /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendf
 top_builddir = /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext
 EGREP = /usr/bin/grep -E
 SED = /usr/bin/sed
-CONFIGURE_COMMAND = './configure' '--enable-test'
-CONFIGURE_OPTIONS = '--enable-test'
+CONFIGURE_COMMAND = './configure'
+CONFIGURE_OPTIONS =
 SHLIB_SUFFIX_NAME = dylib
 SHLIB_DL_SUFFIX_NAME = so
 ZEND_EXT_TYPE = zend_extension
 RE2C = re2c
 AWK = awk
-shared_objects_test = test.lo kernel/main.lo kernel/memory.lo kernel/exception.lo kernel/hash.lo kernel/debug.lo kernel/backtrace.lo kernel/object.lo kernel/array.lo kernel/string.lo kernel/fcall.lo kernel/alternative/fcall.lo kernel/operators.lo kernel/concat.lo test/servicemanager/abstractfactoryinterface.lo test/servicemanager/delegatorfactoryinterface.lo test/servicemanager/exception/exceptioninterface.lo test/servicemanager/exception/invalidargumentexception.lo test/servicemanager/exception/runtimeexception.lo test/servicemanager/exception/servicenotfoundexception.lo test/servicemanager/factoryinterface.lo test/servicemanager/initializerinterface.lo test/servicemanager/servicelocatorinterface.lo test/servicemanager/servicemanager.lo test/servicemanager/servicemanagerconfig.lo
-PHP_PECL_EXTENSION = test
-PHP_MODULES = $(phplibdir)/test.la
+shared_objects_zephir = zephir.lo kernel/main.lo kernel/memory.lo kernel/exception.lo kernel/hash.lo kernel/debug.lo kernel/backtrace.lo kernel/object.lo kernel/array.lo kernel/string.lo kernel/fcall.lo kernel/alternative/fcall.lo kernel/operators.lo kernel/concat.lo zephir/servicemanager/abstractfactoryinterface.lo zephir/servicemanager/delegatorfactoryinterface.lo zephir/servicemanager/exception/exceptioninterface.lo zephir/servicemanager/exception/invalidargumentexception.lo zephir/servicemanager/exception/runtimeexception.lo zephir/servicemanager/exception/servicenotfoundexception.lo zephir/servicemanager/factoryinterface.lo zephir/servicemanager/initializerinterface.lo zephir/servicemanager/servicelocatorinterface.lo zephir/servicemanager/servicemanager.lo zephir/servicemanager/servicemanagerconfig.lo
+PHP_PECL_EXTENSION = zephir
+PHP_MODULES = $(phplibdir)/zephir.la
 PHP_ZEND_EX =
 all_targets = $(PHP_MODULES) $(PHP_ZEND_EX)
 install_targets = install-modules install-headers
@@ -23,10 +23,10 @@ libdir = ${exec_prefix}/lib
 prefix = /usr/local/php5
 phplibdir = /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/modules
 phpincludedir = /usr/local/php5/include/php
-CC = gcc
-CFLAGS = -O0 -g
+CC = cc
+CFLAGS = -g -O2
 CFLAGS_CLEAN = $(CFLAGS)
-CPP = gcc -E
+CPP = cc -E
 CPPFLAGS = -DHAVE_CONFIG_H
 CXX =
 CXXFLAGS =
@@ -165,8 +165,8 @@ distclean: clean
 
 .PHONY: all clean install distclean test
 .NOEXPORT:
-test.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test.c -o test.lo 
+zephir.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir.c -o zephir.lo 
 kernel/main.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/kernel/main.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/kernel/main.c -o kernel/main.lo 
 kernel/memory.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/kernel/memory.c
@@ -193,31 +193,31 @@ kernel/operators.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframewo
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/kernel/operators.c -o kernel/operators.lo 
 kernel/concat.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/kernel/concat.c
 	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/kernel/concat.c -o kernel/concat.lo 
-test/servicemanager/abstractfactoryinterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/abstractfactoryinterface.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/abstractfactoryinterface.c -o test/servicemanager/abstractfactoryinterface.lo 
-test/servicemanager/delegatorfactoryinterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/delegatorfactoryinterface.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/delegatorfactoryinterface.c -o test/servicemanager/delegatorfactoryinterface.lo 
-test/servicemanager/exception/exceptioninterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/exception/exceptioninterface.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/exception/exceptioninterface.c -o test/servicemanager/exception/exceptioninterface.lo 
-test/servicemanager/exception/invalidargumentexception.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/exception/invalidargumentexception.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/exception/invalidargumentexception.c -o test/servicemanager/exception/invalidargumentexception.lo 
-test/servicemanager/exception/runtimeexception.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/exception/runtimeexception.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/exception/runtimeexception.c -o test/servicemanager/exception/runtimeexception.lo 
-test/servicemanager/exception/servicenotfoundexception.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/exception/servicenotfoundexception.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/exception/servicenotfoundexception.c -o test/servicemanager/exception/servicenotfoundexception.lo 
-test/servicemanager/factoryinterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/factoryinterface.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/factoryinterface.c -o test/servicemanager/factoryinterface.lo 
-test/servicemanager/initializerinterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/initializerinterface.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/initializerinterface.c -o test/servicemanager/initializerinterface.lo 
-test/servicemanager/servicelocatorinterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/servicelocatorinterface.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/servicelocatorinterface.c -o test/servicemanager/servicelocatorinterface.lo 
-test/servicemanager/servicemanager.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/servicemanager.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/servicemanager.c -o test/servicemanager/servicemanager.lo 
-test/servicemanager/servicemanagerconfig.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/servicemanagerconfig.c
-	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/test/servicemanager/servicemanagerconfig.c -o test/servicemanager/servicemanagerconfig.lo 
-$(phplibdir)/test.la: ./test.la
-	$(LIBTOOL) --mode=install cp ./test.la $(phplibdir)
+zephir/servicemanager/abstractfactoryinterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/abstractfactoryinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/abstractfactoryinterface.c -o zephir/servicemanager/abstractfactoryinterface.lo 
+zephir/servicemanager/delegatorfactoryinterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/delegatorfactoryinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/delegatorfactoryinterface.c -o zephir/servicemanager/delegatorfactoryinterface.lo 
+zephir/servicemanager/exception/exceptioninterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/exception/exceptioninterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/exception/exceptioninterface.c -o zephir/servicemanager/exception/exceptioninterface.lo 
+zephir/servicemanager/exception/invalidargumentexception.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/exception/invalidargumentexception.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/exception/invalidargumentexception.c -o zephir/servicemanager/exception/invalidargumentexception.lo 
+zephir/servicemanager/exception/runtimeexception.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/exception/runtimeexception.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/exception/runtimeexception.c -o zephir/servicemanager/exception/runtimeexception.lo 
+zephir/servicemanager/exception/servicenotfoundexception.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/exception/servicenotfoundexception.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/exception/servicenotfoundexception.c -o zephir/servicemanager/exception/servicenotfoundexception.lo 
+zephir/servicemanager/factoryinterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/factoryinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/factoryinterface.c -o zephir/servicemanager/factoryinterface.lo 
+zephir/servicemanager/initializerinterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/initializerinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/initializerinterface.c -o zephir/servicemanager/initializerinterface.lo 
+zephir/servicemanager/servicelocatorinterface.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/servicelocatorinterface.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/servicelocatorinterface.c -o zephir/servicemanager/servicelocatorinterface.lo 
+zephir/servicemanager/servicemanager.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/servicemanager.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/servicemanager.c -o zephir/servicemanager/servicemanager.lo 
+zephir/servicemanager/servicemanagerconfig.lo: /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/servicemanagerconfig.c
+	$(LIBTOOL) --mode=compile $(CC)  -I. -I/Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /Users/michael/Sites/zend-skeleton-light/vendor/zendframework/zendframework/zephir/ext/zephir/servicemanager/servicemanagerconfig.c -o zephir/servicemanager/servicemanagerconfig.lo 
+$(phplibdir)/zephir.la: ./zephir.la
+	$(LIBTOOL) --mode=install cp ./zephir.la $(phplibdir)
 
-./test.la: $(shared_objects_test) $(TEST_SHARED_DEPENDENCIES)
-	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_test) $(TEST_SHARED_LIBADD)
+./zephir.la: $(shared_objects_zephir) $(ZEPHIR_SHARED_DEPENDENCIES)
+	$(LIBTOOL) --mode=link $(CC) $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS) $(LDFLAGS) -o $@ -export-dynamic -avoid-version -prefer-pic -module -rpath $(phplibdir) $(EXTRA_LDFLAGS) $(shared_objects_zephir) $(ZEPHIR_SHARED_LIBADD)
 

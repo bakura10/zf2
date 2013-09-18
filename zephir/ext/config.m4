@@ -1,7 +1,7 @@
-PHP_ARG_ENABLE(test, whether to enable test, [ --enable-test   Enable Test framework])
+PHP_ARG_ENABLE(zephir, whether to enable zephir, [ --enable-zephir   Enable Zephir framework])
 
-if test "$PHP_TEST" = "yes"; then
-	AC_DEFINE(HAVE_TEST, 1, [Whether you have Test])
-	test_sources="test.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/alternative/fcall.c kernel/operators.c kernel/concat.c test/servicemanager/abstractfactoryinterface.c test/servicemanager/delegatorfactoryinterface.c test/servicemanager/exception/exceptioninterface.c test/servicemanager/exception/invalidargumentexception.c test/servicemanager/exception/runtimeexception.c test/servicemanager/exception/servicenotfoundexception.c test/servicemanager/factoryinterface.c test/servicemanager/initializerinterface.c test/servicemanager/servicelocatorinterface.c test/servicemanager/servicemanager.c test/servicemanager/servicemanagerconfig.c"
-	PHP_NEW_EXTENSION(test, $test_sources, $ext_shared)
+if test "$PHP_ZEPHIR" = "yes"; then
+	AC_DEFINE(HAVE_ZEPHIR, 1, [Whether you have Zephir])
+	zephir_sources="zephir.c kernel/main.c kernel/memory.c kernel/exception.c kernel/hash.c kernel/debug.c kernel/backtrace.c kernel/object.c kernel/array.c kernel/string.c kernel/fcall.c kernel/alternative/fcall.c kernel/operators.c kernel/concat.c zephir/servicemanager/abstractfactoryinterface.c zephir/servicemanager/delegatorfactoryinterface.c zephir/servicemanager/exception/exceptioninterface.c zephir/servicemanager/exception/invalidargumentexception.c zephir/servicemanager/exception/runtimeexception.c zephir/servicemanager/exception/servicenotfoundexception.c zephir/servicemanager/factoryinterface.c zephir/servicemanager/initializerinterface.c zephir/servicemanager/servicelocatorinterface.c zephir/servicemanager/servicemanager.c zephir/servicemanager/servicemanagerconfig.c"
+	PHP_NEW_EXTENSION(zephir, $zephir_sources, $ext_shared)
 fi

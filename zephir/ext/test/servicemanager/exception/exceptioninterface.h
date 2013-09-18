@@ -1,5 +1,0 @@
-
-extern zend_class_entry *test_servicemanager_exception_exceptioninterface_ce;
-
-ZEPHIR_INIT_CLASS(Test_ServiceManager_Exception_ExceptionInterface);
-
