@@ -9,26 +9,7 @@
 
 namespace Zend\EventManager;
 
-
-/**
- * Abstract aggregate listener
- */
 abstract class AbstractListenerAggregate implements ListenerAggregateInterface
 {
-    /**
-     * @var \Zend\Stdlib\CallbackHandler[]
-     */
-    protected $listeners = array();
-
-    /**
-     * {@inheritDoc}
-     */
-    public function detach(EventManagerInterface $events)
-    {
-        foreach ($this->listeners as $index => $callback) {
-            if ($events->detach($callback)) {
-                unset($this->listeners[$index]);
-            }
-        }
-    }
+    use ListenerAggregateTrait;
 }
