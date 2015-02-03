@@ -31,7 +31,8 @@
     ],
     "require": {
         "php": ">=5.3.23",
-        "zendframework/zendxml": "~1.0-dev"
+        "zendframework/zendxml": "~1.0-dev",
+        "athletic/athletic": "0.1.8"
     },
     "require-dev": {
         "doctrine/annotations": ">=1.0",
@@ -54,6 +55,9 @@
     "autoload": {
         "psr-0": {
             "Zend\\": "library/"
+        },
+        "psr-4": {
+            "Bench\\": "bench/"
         }
     },
     "autoload-dev": {
